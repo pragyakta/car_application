@@ -1,5 +1,5 @@
 "use client";
-import { use, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import { CarProps } from "@/types";
 import CustomButton  from "./CustomButton";
@@ -55,7 +55,7 @@ const CarCard = ({ car }: CarCardProps) => {
 
                     <Image src="/steering-wheel.svg" width={20}
                     height={20} alt="steering wheel"/>
-                    <p className="text-[14px]">
+                    <p className="text-[14px] leading-[17px]">
                         {transmission === 'a' ? 'Automatic':
                         'Manual'}
                     </p>

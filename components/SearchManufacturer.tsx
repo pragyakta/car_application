@@ -5,27 +5,28 @@ import { SearchManufacturerProps } from '@/types'
 import Image from 'next/image';
 
 import { manufacturers } from '@/constants';
-import { isTaggedTemplateExpression } from 'typescript';
 
 
-const SearchManufacturer = ({manufacturer, 
-    setManufacturer}: SearchManufacturerProps) => {
+
+const SearchManufacturer = ({selected, 
+    setSelected}: SearchManufacturerProps) => {
 
         const [query, setQuery] = useState('')
 
         const filteredManufacturers = 
         query === "" ?  //if query was empty return unfiltered data otherwise filtered data
-        manufacturers : manufacturers.filter((item) => (
+        manufacturers : manufacturers.filter((item) => 
             item.toLowerCase()
             .replace(/\s+/g, "")
             .includes(query.toLowerCase().replace(/\s+/g,""))  //replace empty spaces with empty string 
             //if user enters uppercase value or put empty spaces in between
             //this is going to work in every situation 
-        ))
+        );
+
   return (
     <div className='search-manufacturer'>
-        <Combobox value={manufacturer} onChange=
-        {setManufacturer}>
+        <Combobox value={selected} onChange=
+        {setSelected}>
             <div className='relative w-full'>
                 <Combobox.Button className="absolute top-[14px]">
                     <Image
@@ -36,6 +37,7 @@ const SearchManufacturer = ({manufacturer,
                     alt='Car Logo'
                     />
                 </Combobox.Button>
+
                 <Combobox.Input 
                     className="search-manufacturer__input"
                     placeholder='volkswagen'
@@ -50,7 +52,7 @@ const SearchManufacturer = ({manufacturer,
                  leaveTo="opacity-0"
                  afterLeave={() => setQuery('')}
                  >
-                    <Combobox.Options>
+                    <Combobox.Options >
                         {filteredManufacturers.length === 0 && 
                         query !== "" ? (
                             <Combobox.Option 
