@@ -15,13 +15,13 @@ const SearchManufacturer = ({selected,
 
         const filteredManufacturers = 
         query === "" ?  //if query was empty return unfiltered data otherwise filtered data
-        manufacturers : manufacturers.filter((item) => 
+        manufacturers : manufacturers.filter((item) =>( 
             item.toLowerCase()
             .replace(/\s+/g, "")
             .includes(query.toLowerCase().replace(/\s+/g,""))  //replace empty spaces with empty string 
             //if user enters uppercase value or put empty spaces in between
             //this is going to work in every situation 
-        );
+        ));
 
   return (
     <div className='search-manufacturer'>
@@ -41,8 +41,7 @@ const SearchManufacturer = ({selected,
                 <Combobox.Input 
                     className="search-manufacturer__input"
                     placeholder='volkswagen'
-                    displayValue={(manufacturer:string)=> 
-                    manufacturer}
+                    displayValue={(manufacturer:string) => manufacturer}
                     onChange={(e) => setQuery(e.target.value)}
                 />
                 <Transition
@@ -53,15 +52,8 @@ const SearchManufacturer = ({selected,
                  afterLeave={() => setQuery('')}
                  >
                     <Combobox.Options >
-                        {filteredManufacturers.length === 0 && 
-                        query !== "" ? (
-                            <Combobox.Option 
-                            value={query}
-                            className="search-manufacturer__option">
-                                Create "{query}"
-                            </Combobox.Option>
-                        ): (
-                            filteredManufacturers.map((items) => ( 
+                       
+                            {filteredManufacturers.map((items) => ( 
                             <Combobox.Option
                                 key={items}
                                 className={({ active}) => `
@@ -92,7 +84,7 @@ const SearchManufacturer = ({selected,
                                )}
                             </Combobox.Option>
                             )
-                        ))}
+                        )}
 
                     </Combobox.Options>
 
